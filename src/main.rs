@@ -6,6 +6,7 @@ fn main() {
     first_problem_second_part();
     second_problem_first_part();
     second_problem_second_part();
+    third_problem_first_part();
 }
 
 
@@ -81,9 +82,6 @@ fn second_problem_first_part() -> io::Result<()> {
         
         let mut number = int_code_string[i];
         
-        println!("{:?}",int_code_string);
-        // println!("{}",input_1);
-        // println!("{}",input_2);
         
         if number == 1 as i32 {
             let input_1 = int_code_string[int_code_string[i + 1] as usize];
@@ -91,8 +89,6 @@ fn second_problem_first_part() -> io::Result<()> {
             let mut output_position = int_code_string[i + 3];
             let mut final_value : i32;
             final_value = input_1 + input_2;
-
-            // println!("value {} output position {}",final_value, output_position);
         
             int_code_string[output_position as usize] = final_value;
         } else if number == 2 as i32 {
@@ -101,7 +97,7 @@ fn second_problem_first_part() -> io::Result<()> {
             let mut output_position = int_code_string[i + 3];
             let mut final_value : i32;
             final_value = input_1 * input_2;
-            // println!("value {} output position {}",final_value, output_position);
+            
             int_code_string[output_position as usize] = final_value;
 
         } else {
@@ -109,7 +105,6 @@ fn second_problem_first_part() -> io::Result<()> {
         }
     }
 
-    println!("{:?}",int_code_string);
     println!("{}FINAL POSITION",int_code_string[0]);
     Ok(())
 }
@@ -127,8 +122,6 @@ fn second_problem_second_part() -> io::Result<()> {
     }
 
     let mut int_code_string : Vec<i32> = file_string.split(",").map(|s| s.parse().unwrap()).collect();
-    // int_code_string[1] = 12;
-    // int_code_string[2] = 2;
     
     for i in 0..99 {
         for j in 0..99 {
@@ -140,11 +133,6 @@ fn second_problem_second_part() -> io::Result<()> {
         }
     }
     
-    // run_opcode_program(int_code_string.clone(), 12 as i32, 2 as i32);
-    
-
-    // println!("{:?}",int_code_string);
-    // println!("{}FINAL POSITION",int_code_string[0]);
     Ok(())
 }
 
@@ -152,9 +140,7 @@ fn run_opcode_program(unmut_int_code_string : Vec<i32>, param_1:i32, param_2:i32
     let mut code_string = unmut_int_code_string;
     code_string[1] = param_1;
     code_string[2] = param_2;
-    // println!("{}",code_string[1]);
 
-    // println!("{}",code_string[2]);
     for i in (0..code_string.len()).step_by(4) {
 
         let mut number = code_string[i];
@@ -184,6 +170,28 @@ fn run_opcode_program(unmut_int_code_string : Vec<i32>, param_1:i32, param_2:i32
         let solution = param_1 * 100 + param_2;
         return (true, solution);
     }
-    // if code_string[0]
     return (false, 0);
+}
+
+fn third_problem_first_part() -> io::Result<()> {
+    let mut sum_of_fuel_requirements = 0;
+
+    let file = File::open("./data/3.txt")?;
+    let reader = BufReader::new(file);
+    let mut arr : Vec<Vec<&str>> = Vec::new();
+
+    for line in reader.lines() {
+       
+        let i = line?;
+        // let mass: u32 = i.parse::<u32>().unwrap();
+        // let individual_fuel_required = mass/3 -2;
+        // sum_of_fuel_requirements += individual_fuel_required;
+        // println!("{}",i);
+        let mut temp_line = i.split(",").collect(); 
+        arr.push(temp_line);
+
+let ch = i.chars().next().unwrap();
+    }
+    // println!("Question 1a {}", sum_of_fuel_requirements);
+    Ok(())
 }
